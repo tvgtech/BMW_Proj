@@ -1,0 +1,296 @@
+BMW
+
+1. DATASET
+--------
+
+archivo de datos = 'bmw_pricing_v3.csv'
+
+2. INFO
+--------
+bmw_original
+
+shape = 4843 rows, 18 columns
+
+columns =	marca				:	object
+		modelo				:	object
+		km				:	float64
+		potencia			:	float64
+		fecha_registro			:	object
+		tipo_gasolina			:	object
+		color				:	object
+		tipo_coche			:	object
+		volante_regulable		:	object
+		aire_acondicionado		:	object
+		camara_trasera			:	object
+		asientos_traseros_plegables	:	object
+		elevalunas_electrico		:	object
+		bluetooth			:	object
+		gps				:	bool
+		alerta_lim_velocidad		:	object
+		precio				:	float64
+		fecha_venta			:	object
+		
+* Primeras observaciones:
+	- Las columnas aparentemente booleanas que tienen nulos (volante_regulable, aire_acondicionado...) se cargan como tipo object
+	- La columna gps es booleana porque no tiene nulos
+	- Las columnas de fecha (fecha_registro, fecha_venta) se cargan como object
+		    
+
+3. DUPLICADOS
+---------
+
+registros duplicados =		8, 9		:	The Avengers
+
+
+bmw_sinDuplicados
+shape =  rows,  columns
+
+
+4. NULOS
+------
+
+columns =	 			: 	 		: 	11 nulos
+		
+
+5. ANÁLISIS UNIVARIABLE
+-------
+
+****
+COLUMNA 0 = 
+Object (String)
+
+value_counts ->		Color			: 	85 %
+
+
+- Demasiados registros con valores nulos (no predecibles)
+- Valores 'color' y 'Color' se deben unificar
+- Muy pocos valores 'Black and White'
+
+Conclusion: la columna no es representativa -> Se elimina
+
+****
+COLUMNA 1 = director_name
+Object (String)
+
+value_counts ->		61 directores distintos	(Peter Jackson...ClintEastwood)
+			11 registros con valor nulo 	:	12 %		
+			
+- Muchos directores distintos
+- Demasiados registros con valor nulo
+- Campo director importante para una película
+
+Conclusión -> Columna representativa, se mantiente y se da el valor 'desconocido' a los registros nulos
+
+****
+COLUMNA 2 = duration
+Number (int64) 
+Minutos
+
+No tiene valores nulos -> OK
+
+histograma , describe ->	Rango de valores (-50, 650)
+				Posibles outliers (High & Low)
+				
+- Se cambia el dtype a int16	
+
+- Outliers ->			The Hobbit		:	-50
+				Django Unchained	:	580
+				The Lone Ranger		:	650
+				Jersey Boys		:	5
+				
+				Parecen errores -> Se sustituyen por la duracion media
+				
+- Datos estadísticos ->		count		:	89
+				mean		:	149.87
+				std		:	17.02
+				min		:	134
+				25%		:	139
+				50%		:	144
+				75%		:	156
+				max		:	240
+				
+****
+COLUMNA 3 = gross
+Number (float64)
+Dolares
+
+value counts, hist ->		83 valores distintos	:	(4.12 e04, 6.23 e08)
+				6 registros con valor nulo
+				Posible outlier (> 5 e08)
+				
+- Posible outlier -> Avengers (6.2 e08) NO es outlier
+			
+- Nulos -> Depende del target, pero suponiendo que el target no tiene que ver con los ingresos se sustituyen por la media
+
+- Datos estadísticos ->		count		:	89
+				mean		:	148.2 M
+				std		:	1.3 M
+				min		:	41.2 k
+				25%		:	47.1 M
+				50%		:	116.9 M
+				75%		:	202.9 M
+				max		:	623.3 M
+				
+****
+COLUMNA 4 = genres
+Objeto (String)
+
+value counts ->		Strings compuestas por varios géneros separados por '|'
+			1 valor nulo
+			
+- Nulo -> Información relevante para otras columnas, no se descarta. Los valores nulos tras el split se sustituyen por 'sin genero'
+
+- Split	-> expandir lista de generos y eliminar la original
+
+
+****
+COLUMNA 5 = movie_title
+Object (String)
+
+value counts ->		No hay nombres de películas duplicados (ya se borraron)
+			No hay registros con valor nulo
+			
+Está OK
+
+****
+COLUMNA 6 = title_year
+Number (int64)
+año
+
+- Valores ->		Numeros enteros rango (202, 2016). Se cambia el tipo de dato a int16
+			No hay nulos
+			Posibles outliers (Low)
+			
+
+- Outliers -> 		El histograma muestra claramente que hay low outliers
+			Batman v Superman: Dawn of Justice	: 	202
+			Child 44				:	205
+			
+			Se sustituyen por la mediana de los años (la media tiene en cuenta los outliers y nos da un valor que no es válido)
+			
+
+- Datos estadísticos ->		count		:	89
+				mean		:	2012.9
+				std		:	1.57
+				min		:	2010
+				25%		:	2012
+				50%		:	2013
+				75%		:	2014
+				max		:	2016
+				
+Dependiendo del target, puede ser que la columna no sea muy representativa y que se pueda borrar
+
+****
+COLUMNA 7 = language
+Object (String)
+
+- value counts -> 		English		:	89
+				No hay valores nulos
+
+Esta información no es nada representativa -> Se elimina la columna
+
+****
+COLUMNA 8 = country
+Object (String)
+
+- value counts ->		USA		:	70
+				UK		:	6
+				usa		:	3
+				France		:	2
+				Germany		:	1
+				New Zealand	:	1
+				India		:	1
+				United States	:	1
+				Australia	:	1
+				Czech Republic	:	1
+				Kyrgyzstan	:	1
+				Canada		:	1
+				No hay valores nulos
+
+La mayoría de películas son de Estados Unidos. Esto puede no ser muy representativo, pero también es un dato real -> Se mantiene la columna
+
+Los valores 'USA', 'usa' y 'United States' se refieren al mismo valor -> Se sustituyen por 'USA'
+
+
+****
+COLUMNA 9 = budget
+Number (float64)
+Dolares
+
+value counts, hist ->		83 valores distintos	:	(4.12 e04, 6.23 e08)
+				6 registros con valor nulo
+				
+			
+- Nulos -> Depende del target, pero suponiendo que el target no tiene que ver con los ingresos se sustituyen por la media
+
+- Datos estadísticos ->		count		:	89
+				mean		:	148.2 M
+				std		:	1.3 M
+				min		:	41.2 k
+				25%		:	47.1 M
+				50%		:	116.9 M
+				75%		:	202.9 M
+				max		:	623.3 M
+
+****
+COLUMNA 10 = imdb_score
+Number (float64)
+Putuacion sobre 10
+
+value counts, hist ->		34 valores distintos	:	(-7.5 , 8.8)
+				No hay registros con valor nulo
+				Outliers (Valores negativos)
+				
+- Outliers ->			Cloud Atlas	:	-7.5
+				Unbroken	:	-1.2
+				
+				Se sustituyen por la mediana para no alterar significativamente la distribucion
+			
+
+- Datos estadísticos ->		count		:	89
+				mean		:	7.12
+				std		:	0.95
+				min		:	3
+				25%		:	6.7
+				50%		:	7.2
+				75%		:	7.9
+				max		:	8.8
+
+
+****
+COLUMN 11 = actors
+Object (String)
+
+value counts ->		Strings compuestas todas por 3 actores separados por ','
+			No hay ningún valor nulo
+			
+
+- Split	-> expandir lista de actores, crearlas en el dataframe y eliminar columna original.
+
+
+****
+COLUMNA 12 = movie_facebook_likes
+Number (int64)
+
+value counts, hist ->		66 valores distintos	:	(0 , 349000)
+				No hay registros con valor nulo
+				Posible outlier (> 250000)
+				
+- Outlier ->			Interstellar	:	349000
+						
+				No es outlier, dado que está en el top de peliculas mejor valoradas el dato es coherente
+			
+
+- Datos estadísticos ->		count		:	89
+				mean		:	64983.4
+				std		:	58511.6
+				min		:	0
+				25%		:	24000
+				50%		:	54000
+				75%		:	83000
+				max		:	349000
+
+
+
+
+		
