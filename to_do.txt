@@ -1,0 +1,46 @@
+DOCUMENTO PDF
+------
+- Poner el segundo apellido de cada uno.
+- Falta el anexo. En sus indicaciones dice que hay que incluir las columnas y sus tipos y las 5 primeras filas.
+¿De qué dataset? Pone que el que está ya preprocesado, pero me parece muy basto incluir todas las columnas del ONE Hot Encoding
+
+
+CÓDIGO
+-------
+
+- Hacer PROGRAMA final a partir de Toni_EDA_final.ipynb (programa .py o notebook .ipynb ???)
+
+NULOS (3)
+
+- 3.3 color: Imputar valor 'sin_info_color' en lugar de 'otros' o cambiar texto
+
+- 3.4 tipo_coche: También se imputó 'otros', mejor 'sin_info' ?
+
+- 3.5 aire_acondicionado: Se imputa 'sin_info'. Estandarizar?
+
+- 3.7 bluetooth: También se imputa 'sin_info'
+
+- 3.8 alerta_lim_velocidad: También se imputa 'sin_info'
+
+
+- 3.9.1 modelo: Imputación manual (no se filtra 'precio'?) 
+
+
+ANALISIS UNIVARIABLE (4)
+
+- 4.2.3.1 modelo:   Comentarios celda 865 y 869 (cambiar eliminar por imputar otros)
+                    Comentario celda 871 (Cambiar 27 por 28)
+
+- 4.2.3.2 tipo_gasolina:    Comentario celda 874 (Añadir eliminar categoría electro)
+
+
+ANALISIS CORRELACION final (9)
+
+- tipo_gasolina: Comentamos eliminar esta columna pero no lo hacemos (Lo eliminamos? No lo comentamos?)
+
+- extras: Agrupar extras ?? (Columna extras numérica con la cantidad de extras)
+
+
+MODELO SIN MIEDO (10)
+
+- Quitar esta parte
