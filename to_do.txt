@@ -3,11 +3,14 @@ DOCUMENTO PDF
 - Poner el segundo apellido de cada uno.
   -[Toni]: Antonio Vargas Gómez
   -[Esther]: Esther Sanz Llorente
+  - [Jorge]: Jorge Guiberteau Sánchez
+
 - Falta el anexo. En sus indicaciones dice que hay que incluir las columnas y sus tipos y las 5 primeras filas.
 ¿De qué dataset? Pone que el que está ya preprocesado, pero me parece muy basto incluir todas las columnas del ONE Hot Encoding
   -[Toni]: Yo las pondría sin más. Son las columnas que son. A malas, le podemos escribir a  Joseph y consultárselo. 
   -[Esther]: De acuerdo con Toni. Lo que sale de un info del dataset final para que se vean los tipos y las 5 filas.
   -[Pedro]: Ok. Voy a escribir a Joseph, aunque igual no contesta hasta la semana que viene. De momento, lo hago con el dataset final.
+  -[Jorge]: Si es lo que pide... adelante con el listado de columnas, aunque sea un chorizo tremendo. Lo que me parece complicado es que se vea el pantallazo de los 5 primeros registros con todas esas columnas...
 
 CÓDIGO
 -------
@@ -16,30 +19,36 @@ CÓDIGO
   -[Toni]: Supongo que será en .ipynb ya que no hemos trabajado con fichero .py hasta la fecha.
   -[Esther]: Si... supongo que .ipynb... Y si no estamos seguros. Se lo preguntamos también a Joseph.
   -[Pedro]: OK. Haciendo notebook final...
+  -[Jorge]: creo que mejor ipynb. Así, además, puede ejecutarlo paso a paso si quiere.
 
 NULOS (3)
 
 - 3.3 color: Imputar valor 'sin_info_color' en lugar de 'otros' o cambiar texto
     -[Toni]: Yo personalmente dejaría el 'otros' siemper que sea posible. Al poner 'sin_info_x', de cara a presentarlo a un jefe etc, tiene una peor connotación que un 'otros', como dando a entender que faltan cosas o que no está completo, a mi parecer. 
   -[Esther]: Buff, aquí tengo el "corazón partido"... porque el otros me da la sensación que es más "teníamos la info pero los hemos agrupado (como hicimos con los modelos)"... pero tb estoy de acuerdo con lo que dice Toni. Así que lo que diga la mayoría!
+  -[Jorge]: Yo pondría en todos un mismo texto. La idea es que haya un texto para que el modelo pueda trabajar. Sin_info, o sin_datos, me parecen bien, y creo que representan la realidad de lo que pasa.
 
 - 3.4 tipo_coche: También se imputó 'otros', mejor 'sin_info' ?
     -[Toni]: Idem
     -[Esther]: Idem
+    -[Jorge]: Idem anterior
 
 - 3.5 aire_acondicionado: Se imputa 'sin_info'. Estandarizar?
     -[Toni]: A los que sean boleanos que no tenga sentido poner un 'otros', me parece bien estandarizar el 'sin_info'.
     -[Esther]: De acuedo con Toni
+    -[Jorge]: Idem anterior
+
 
 - 3.7 bluetooth: También se imputa 'sin_info'
     -[Toni]: Idem
     -[Esther]: De acuedo con Toni
+    -[Jorge]: Idem anterior
 
 - 3.8 alerta_lim_velocidad: También se imputa 'sin_info'
     -[Toni]: Idem
     -[Esther]: De acuedo con Toni
-
     -[Pedro]: Se quedan como están
+    -[Jorge]: Idem anterior    
 
 - 3.9.1 modelo: Imputación manual (no se filtra 'precio'?) 
     -[Toni]: Al ser el Target no lo utilicé para filtrar.
@@ -57,14 +66,16 @@ ANALISIS CORRELACION final (9)
 - tipo_gasolina: Comentamos eliminar esta columna pero no lo hacemos (Lo eliminamos? No lo comentamos?)
     -[Toni]: Realmente, como vimo que no influía sobre el precio, se podría quitar. Puede que lo mejor fuese hacer una prueba simulando un modelo sin esa columna y comparar contra el que hicimos y según el resultado dejar la columna o no, y si la eliminamos, justificar con haber hecho las dos simulaciones.
     -[Esther]: Yo la dejaría. Es info que tal y como comentamos quizá validaríamos con las simulaciones... y que quizá quitaríamos o dejaríamos usando explicaciones que nos den cuando hagamos la parte de Machine Learning... pero es mi humilde opinión... :)
-
     -[Pedro]: Ok. Está bien dejarlo comentado pero es verdad que si la eliminamos sería volver a realizar el preprocesado. Se queda así.
+    -[Jorge]: Estoy con Esther. Puede que cuando avancemso en el máster, tengamos más criterio para decidir que esas columnas aportan o no info al modelo, y tomar la decisión de eliminarla. De momnto, la dejaría.
+
 
 - extras: Agrupar extras ?? (Columna extras numérica con la cantidad de extras)
     -[Esther]: ¿pero borrar las columnas de los extras y dejar solo esa? ¿o añadirla?
 
     - [Pedro]: Sí, lo que se me ocurrió es agruparlas y poner un número entero con los extras que tenga el vehículo, y eliminarlas.
                 Pero mejor lo dejamos como está.
+    
 
 MODELO SIN MIEDO (10)
 
