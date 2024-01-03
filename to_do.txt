@@ -7,6 +7,7 @@ DOCUMENTO PDF
 ¿De qué dataset? Pone que el que está ya preprocesado, pero me parece muy basto incluir todas las columnas del ONE Hot Encoding
   -[Toni]: Yo las pondría sin más. Son las columnas que son. A malas, le podemos escribir a  Joseph y consultárselo. 
   -[Esther]: De acuerdo con Toni. Lo que sale de un info del dataset final para que se vean los tipos y las 5 filas.
+  -[Pedro]: Ok. Voy a escribir a Joseph, aunque igual no contesta hasta la semana que viene. De momento, lo hago con el dataset final.
 
 CÓDIGO
 -------
@@ -14,6 +15,7 @@ CÓDIGO
 - Hacer PROGRAMA final a partir de Toni_EDA_final.ipynb (programa .py o notebook .ipynb ???)
   -[Toni]: Supongo que será en .ipynb ya que no hemos trabajado con fichero .py hasta la fecha.
   -[Esther]: Si... supongo que .ipynb... Y si no estamos seguros. Se lo preguntamos también a Joseph.
+  -[Pedro]: OK. Haciendo notebook final...
 
 NULOS (3)
 
@@ -37,6 +39,8 @@ NULOS (3)
     -[Toni]: Idem
     -[Esther]: De acuedo con Toni
 
+    -[Pedro]: Se quedan como están
+
 - 3.9.1 modelo: Imputación manual (no se filtra 'precio'?) 
     -[Toni]: Al ser el Target no lo utilicé para filtrar.
 
@@ -54,8 +58,13 @@ ANALISIS CORRELACION final (9)
     -[Toni]: Realmente, como vimo que no influía sobre el precio, se podría quitar. Puede que lo mejor fuese hacer una prueba simulando un modelo sin esa columna y comparar contra el que hicimos y según el resultado dejar la columna o no, y si la eliminamos, justificar con haber hecho las dos simulaciones.
     -[Esther]: Yo la dejaría. Es info que tal y como comentamos quizá validaríamos con las simulaciones... y que quizá quitaríamos o dejaríamos usando explicaciones que nos den cuando hagamos la parte de Machine Learning... pero es mi humilde opinión... :)
 
+    -[Pedro]: Ok. Está bien dejarlo comentado pero es verdad que si la eliminamos sería volver a realizar el preprocesado. Se queda así.
+
 - extras: Agrupar extras ?? (Columna extras numérica con la cantidad de extras)
     -[Esther]: ¿pero borrar las columnas de los extras y dejar solo esa? ¿o añadirla?
+
+    - [Pedro]: Sí, lo que se me ocurrió es agruparlas y poner un número entero con los extras que tenga el vehículo, y eliminarlas.
+                Pero mejor lo dejamos como está.
 
 MODELO SIN MIEDO (10)
 
